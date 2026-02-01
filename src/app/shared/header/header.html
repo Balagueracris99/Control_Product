@@ -1,0 +1,7 @@
+<mat-toolbar class="header-toolbar">
+  <span class="title">Control de Inventarios</span>
+  @if (currentUser(); as user) {
+    <span class="spacer"></span>
+    <span class="user-info">{{ user.name }} ({{ user.email }})</span>
+  }
+</mat-toolbar>

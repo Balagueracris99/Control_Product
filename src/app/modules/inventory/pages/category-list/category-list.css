@@ -1,0 +1,49 @@
+.category-list-page {
+  padding: var(--app-spacing-lg);
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  margin: 0.5rem 0 0;
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9375rem;
+}
+
+.error-banner {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
+  border-radius: var(--app-radius-sm);
+}
+
+.form-card {
+  margin-bottom: 1.5rem;
+}
+
+.inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.inline-form mat-form-field {
+  min-width: 180px;
+}
+
+.table-card {
+  overflow: hidden;
+}
+
+.full-width {
+  width: 100%;
+}

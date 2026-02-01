@@ -29,6 +29,11 @@ yarn-error.log
 !.vscode/mcp.json
 .history/*
 
+# Environment (credenciales - no subir)
+.env
+.env.local
+backend/.env
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/

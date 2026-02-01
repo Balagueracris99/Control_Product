@@ -1,0 +1,98 @@
+.home-page {
+  min-height: 100%;
+  padding: var(--app-spacing-lg);
+}
+
+.home-hero {
+  background: linear-gradient(135deg, var(--mat-sys-primary-container) 0%, var(--mat-sys-tertiary-container) 100%);
+  border-radius: var(--app-radius-lg);
+  padding: 2.5rem;
+  margin-bottom: var(--app-spacing-lg);
+  box-shadow: var(--app-shadow);
+}
+
+.home-hero-content {
+  max-width: 560px;
+}
+
+.home-hero-icon {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  color: var(--mat-sys-primary);
+  margin-bottom: 1rem;
+}
+
+.home-hero h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+  line-height: 1.3;
+}
+
+.home-greeting {
+  margin: 0.5rem 0 0;
+  font-size: 1.125rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.home-description {
+  margin: 1rem 0 0;
+  line-height: 1.6;
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.9375rem;
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--app-spacing);
+}
+
+.home-card {
+  cursor: pointer;
+  border-radius: var(--app-radius-md);
+  padding: 1.5rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.home-card:hover {
+  box-shadow: var(--app-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.home-card-icon {
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--mat-sys-primary);
+  margin-bottom: 1rem;
+}
+
+.home-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+}
+
+.home-card p {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9375rem;
+  color: var(--mat-sys-on-surface-variant);
+  line-height: 1.5;
+}
+
+.home-card-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mat-sys-primary);
+}
+
+.home-card:hover .home-card-link {
+  text-decoration: underline;
+}

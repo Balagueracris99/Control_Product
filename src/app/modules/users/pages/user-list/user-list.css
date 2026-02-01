@@ -1,0 +1,45 @@
+.user-list-page {
+  padding: 1rem;
+}
+.page-header {
+  margin-bottom: 1.5rem;
+}
+.page-header h1 {
+  margin: 0 0 0.25rem 0;
+}
+.subtitle {
+  margin: 0;
+  color: var(--mat-form-field-supporting-text-color, #666);
+}
+.error-banner {
+  background: #f44336;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.form-card {
+  margin-bottom: 1.5rem;
+}
+.inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.inline-form mat-form-field,
+.inline-form mat-checkbox {
+  flex: 0 0 auto;
+}
+.form-status {
+  display: flex;
+  align-items: center;
+}
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.table-card table {
+  width: 100%;
+}

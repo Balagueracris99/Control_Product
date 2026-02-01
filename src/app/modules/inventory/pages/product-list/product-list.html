@@ -1,0 +1,85 @@
+<div class="product-list-page">
+  <div class="list-header">
+    <div class="list-header-title">
+      <mat-icon class="list-title-icon">inventory</mat-icon>
+      <h1>Inventario de productos</h1>
+    </div>
+    <a mat-flat-button color="primary" routerLink="/inventory/new" class="btn-new">
+      <mat-icon>add</mat-icon>
+      Nuevo producto
+    </a>
+  </div>
+
+  @if (error) {
+    <div class="list-error">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ error }}</span>
+    </div>
+  }
+
+  @if (loading) {
+    <div class="list-loading">
+      <mat-spinner diameter="48"></mat-spinner>
+      <p>Cargando productos...</p>
+    </div>
+  } @else {
+    <mat-card class="table-card">
+      <div class="table-wrapper">
+        <table mat-table [dataSource]="dataSource" class="products-table">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+          </ng-container>
+          <ng-container matColumnDef="sku">
+            <th mat-header-cell *matHeaderCellDef>SKU</th>
+            <td mat-cell *matCellDef="let row">{{ row.sku }}</td>
+          </ng-container>
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef>Categoría</th>
+            <td mat-cell *matCellDef="let row">{{ row.category?.name ?? '-' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef>Stock</th>
+            <td mat-cell *matCellDef="let row">
+              <span class="stock-badge">{{ row['currentStock'] }}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>Precio</th>
+            <td mat-cell *matCellDef="let row" class="price-cell">{{ formatPrice(row.price) }}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-chip [color]="row.status ? 'primary' : 'warn'">
+                {{ row.status ? 'Activo' : 'Inactivo' }}
+              </mat-chip>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="actions-header">Acciones</th>
+            <td mat-cell *matCellDef="let row" class="actions-cell">
+              <button mat-icon-button (click)="editProduct(row)" matTooltip="Editar producto">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteProduct(row, $event)" matTooltip="Eliminar">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns" class="table-row"></tr>
+
+          <tr class="mat-row empty-row" *matNoDataRow>
+            <td class="mat-cell empty-cell" [attr.colspan]="displayedColumns.length">
+              <mat-icon>inbox</mat-icon>
+              <p>No hay productos registrados</p>
+              <a mat-button color="primary" routerLink="/inventory/new">Registrar primer producto</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-card>
+  }
+</div>

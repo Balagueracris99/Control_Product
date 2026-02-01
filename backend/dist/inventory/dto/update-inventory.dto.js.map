@@ -1,0 +1,1 @@
+{"version":3,"file":"update-inventory.dto.js","sourceRoot":"","sources":["../../../src/inventory/dto/update-inventory.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAA4D;AAE5D,MAAa,kBAAkB;CAU9B;AAVD,gDAUC;AANC;IAHC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;IACV,IAAA,qBAAG,EAAC,CAAC,CAAC;;wDACe;AAKtB;IAHC,IAAA,4BAAU,GAAE;IACZ,IAAA,0BAAQ,GAAE;IACV,IAAA,qBAAG,EAAC,CAAC,CAAC;;oDACW"}

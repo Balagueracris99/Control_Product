@@ -1,0 +1,118 @@
+<div class="product-form-page">
+  <mat-card class="product-form-card">
+    <mat-card-header>
+      <div class="form-header">
+        <mat-icon class="form-header-icon">{{ isEdit ? 'edit' : 'add_box' }}</mat-icon>
+        <div>
+          <mat-card-title>{{ isEdit ? 'Editar producto' : 'Registrar nuevo producto' }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ isEdit ? 'Modifica los datos del producto' : 'Completa los campos para dar de alta un producto' }}
+          </mat-card-subtitle>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      @if (loading) {
+        <div class="form-loading">
+          <mat-spinner diameter="48"></mat-spinner>
+          <p>Cargando producto...</p>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="product-form">
+          @if (error) {
+            <div class="form-error">
+              <mat-icon>error_outline</mat-icon>
+              <span>{{ error }}</span>
+            </div>
+          }
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nombre del producto</mat-label>
+              <input matInput formControlName="name" placeholder="Ej. Laptop HP 15" />
+              <mat-icon matPrefix>label</mat-icon>
+              @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+                <mat-error>El nombre es obligatorio</mat-error>
+              }
+              @if (form.get('name')?.hasError('minlength') && form.get('name')?.touched) {
+                <mat-error>Mínimo 2 caracteres</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>SKU</mat-label>
+              <input matInput formControlName="sku" placeholder="Ej. PROD-001" />
+              <mat-icon matPrefix>qr_code</mat-icon>
+              @if (form.get('sku')?.hasError('required') && form.get('sku')?.touched) {
+                <mat-error>El SKU es obligatorio</mat-error>
+              }
+              @if (form.get('sku')?.hasError('minlength') && form.get('sku')?.touched) {
+                <mat-error>Mínimo 2 caracteres</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Categoría</mat-label>
+              <mat-select formControlName="categoryId" placeholder="Selecciona categoría">
+                @for (cat of categories; track cat.id) {
+                  <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>category</mat-icon>
+              @if (form.get('categoryId')?.hasError('required') && form.get('categoryId')?.touched) {
+                <mat-error>La categoría es obligatoria</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Precio (pesos colombianos)</mat-label>
+              <input matInput type="number" formControlName="price" min="0" step="1" />
+              <mat-icon matPrefix>attach_money</mat-icon>
+              @if (form.get('price')?.hasError('required') && form.get('price')?.touched) {
+                <mat-error>El precio es obligatorio</mat-error>
+              }
+              @if (form.get('price')?.hasError('min') && form.get('price')?.touched) {
+                <mat-error>Debe ser mayor o igual a 0</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Stock actual</mat-label>
+              <input matInput type="number" formControlName="currentStock" min="0" />
+              <mat-icon matPrefix>inventory_2</mat-icon>
+              @if (form.get('currentStock')?.hasError('min') && form.get('currentStock')?.touched) {
+                <mat-error>Debe ser mayor o igual a 0</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Stock mínimo (alerta)</mat-label>
+              <input matInput type="number" formControlName="minStock" min="0" />
+              <mat-icon matPrefix>warning</mat-icon>
+              @if (form.get('minStock')?.hasError('min') && form.get('minStock')?.touched) {
+                <mat-error>Debe ser mayor o igual a 0</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="form-status">
+            <mat-checkbox formControlName="status">Producto activo (visible en inventario)</mat-checkbox>
+          </div>
+          <div class="form-actions">
+            <button mat-button type="button" routerLink="/inventory">
+              <mat-icon>arrow_back</mat-icon>
+              Cancelar
+            </button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="saving">
+              @if (saving) {
+                <mat-spinner diameter="24"></mat-spinner>
+              } @else {
+                <ng-container>
+                  <mat-icon>{{ isEdit ? 'save' : 'add' }}</mat-icon>
+                  {{ isEdit ? 'Guardar cambios' : 'Registrar producto' }}
+                </ng-container>
+              }
+            </button>
+          </div>
+        </form>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

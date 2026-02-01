@@ -1,0 +1,95 @@
+<div class="user-list-page">
+  <div class="page-header">
+    <h1>Usuarios</h1>
+    <p class="subtitle">{{ editingUserId != null ? 'Edita los datos del usuario.' : 'Registra nuevos usuarios o edita los existentes.' }}</p>
+  </div>
+
+  @if (error) {
+    <div class="error-banner">{{ error }}</div>
+  }
+
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>{{ editingUserId != null ? 'Editar usuario' : 'Nuevo usuario' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="inline-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" placeholder="Nombre completo" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Correo</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="email@ejemplo.com" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password" [placeholder]="editingUserId != null ? 'Dejar en blanco para no cambiar' : 'Mínimo 6 caracteres'" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="role">
+            <mat-option value="USER">Usuario</mat-option>
+            <mat-option value="ADMIN">Administrador</mat-option>
+          </mat-select>
+        </mat-form-field>
+        @if (editingUserId != null) {
+          <div class="form-status">
+            <mat-checkbox formControlName="status">Usuario activo</mat-checkbox>
+          </div>
+        }
+        <div class="form-actions">
+          @if (editingUserId != null) {
+            <button mat-button type="button" (click)="cancelEdit()">Cancelar</button>
+          }
+          <button mat-flat-button color="primary" type="submit" [disabled]="saving">
+            {{ editingUserId != null ? 'Guardar cambios' : 'Crear usuario' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <table mat-table [dataSource]="dataSource" class="full-width">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Correo</th>
+        <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Rol</th>
+        <td mat-cell *matCellDef="let row">{{ row.role === 'ADMIN' ? 'Administrador' : 'Usuario' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-chip [color]="row.status ? 'primary' : 'warn'">{{ row.status ? 'Activo' : 'Inactivo' }}</mat-chip>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef>Registro</th>
+        <td mat-cell *matCellDef="let row">{{ formatDate(row.created_at) }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="startEdit(row)" matTooltip="Editar usuario">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteUser(row, $event)" matTooltip="Eliminar usuario">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length">No hay usuarios.</td>
+      </tr>
+    </table>
+  </mat-card>
+</div>

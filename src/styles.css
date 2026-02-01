@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globales - Control de Inventarios */
+* {
+  box-sizing: border-box;
+}
+
+/* Variables de diseño compartidas */
+:root {
+  --app-radius-sm: 8px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 16px;
+  --app-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --app-shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --app-spacing: 1.5rem;
+  --app-spacing-lg: 2rem;
+}

@@ -1,0 +1,29 @@
+<div class="home-page">
+  <div class="home-hero">
+    <div class="home-hero-content">
+      <mat-icon class="home-hero-icon">inventory_2</mat-icon>
+      <h1>Bienvenido al Control de Inventarios</h1>
+      @if (currentUser(); as user) {
+        <p class="home-greeting">Hola, {{ user.name || user.email }}</p>
+      }
+      <p class="home-description">
+        Gestiona tu inventario de productos: consulta el listado, agrega nuevos,
+        edita y da de baja según necesites.
+      </p>
+    </div>
+  </div>
+  <div class="home-cards">
+    <mat-card class="home-card" routerLink="/inventory">
+      <mat-icon class="home-card-icon">inventory</mat-icon>
+      <h2>Inventario</h2>
+      <p>Ver y gestionar todos los productos</p>
+      <span class="home-card-link">Ir al inventario</span>
+    </mat-card>
+    <mat-card class="home-card" routerLink="/inventory/new">
+      <mat-icon class="home-card-icon">add_circle</mat-icon>
+      <h2>Nuevo producto</h2>
+      <p>Registrar un nuevo producto en el inventario</p>
+      <span class="home-card-link">Registrar producto</span>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="category-list-page">
+  <div class="page-header">
+    <h1>Categorías</h1>
+    <p class="subtitle">Crea categorías para asignar a los productos (ej. Electrónica, Ropa).</p>
+  </div>
+
+  @if (error) {
+    <div class="error-banner">{{ error }}</div>
+  }
+
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Nueva categoría</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="inline-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" placeholder="Ej. Electrónica" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Descripción (opcional)</mat-label>
+          <input matInput formControlName="description" />
+        </mat-form-field>
+        <mat-checkbox formControlName="status">Activa</mat-checkbox>
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving">Guardar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="table-card">
+    <table mat-table [dataSource]="dataSource" class="full-width">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let row">{{ row.description || '-' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-chip [color]="row.status ? 'primary' : 'warn'">{{ row.status ? 'Activa' : 'Inactiva' }}</mat-chip>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="warn" (click)="delete(row, $event)" matTooltip="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length">No hay categorías. Crea una arriba.</td>
+      </tr>
+    </table>
+  </mat-card>
+</div>

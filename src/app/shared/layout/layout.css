@@ -1,0 +1,29 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--mat-sys-surface-container, #f3edf7);
+  border-right: 1px solid var(--mat-sys-outline-variant, #e7e0ec);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.header {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--mat-sys-outline-variant, #e7e0ec);
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+  background: var(--mat-sys-surface, #fff);
+}
